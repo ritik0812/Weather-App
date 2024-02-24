@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="" stylesheet" href="./styles.css">
+
+    <title>Document</title>
+</head>
+
+<body>
+    <section class="vh-100">
+        <div class="container py-5 h-100">
+
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-md-8 col-lg-6 col-xl-4">
+
+                    <h3 class="mb-4 pb-2 fw-normal">Check the weather forecast</h3>
+
+                    <div class="input-group rounded mb-3">
+                        <form action="/city" method="GET">
+                            <input id="cityName" name="name" type="search" class="form-control rounded"
+                                placeholder="City" aria-label="Search" aria-describedby="search-addon" />
+                            <button type="submit" class="btn btn-light"
+                                style="position: absolute; margin-left: 13.5rem; margin-top: -2.2rem; border-radius: 10%; border-style: none;">
+                                Check
+                            </button>
+                        </form>
+                    </div>
+
+
+                    <div class="card shadow-0 border">
+                        <div class="card-body p-4">
+
+                            <h4 class="mb-1 sfw-normal">{{location}} , {{country}}</h4>
+                            <p class="mb-2">Current temperature: <strong>{{currTemp}}</strong></p>
+                            <p>Feels like: <strong>{{feelTemp}}</strong></p>
+                            <p>Max: <strong>{{maxTemp}}</strong>, Min: <strong>{{minTemp}}</strong></p>
+
+                            <div class="d-flex flex-row align-items-center">
+                                <p class="mb-0 me-4 date" id="date">WED | OCT 23 | 10:49AM</p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <script>
+        const currDate = document.getElementById("date");
+        console.log(currDate.innerHTML);
+        const getCurrDay = () => {
+            var weekDay = new Array(7);
+            weekDay[0] = "Sunday";
+            weekDay[1] = "Monday";
+            weekDay[2] = "Tuesday";
+            weekDay[3] = "Wednesday";
+            weekDay[4] = "Thursday";
+            weekDay[5] = "Friday";
+            weekDay[6] = "Saturday";
+
+            var currTime = new Date();
+            let day = weekDay[currTime.getDay()];
+            return day;
+        }
+
+        const getCurrTime = () => {
+            var months = [
+                "Jan",
+                "Feb",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "Aug",
+                "Sep",
+                "Oct",
+                "Nov",
+                "Dec",
+            ];
+
+            var now = new Date();
+            var month = months[now.getMonth()];  // Actual data start from 0 so we are adding 1.
+            var date = now.getDate();
+            console.log(month)
+            console.log(date)
+
+            let hours = now.getHours();
+            let mins = now.getMinutes();
+
+            let periods = "AM";
+
+            if (hours > 11) {
+                periods = "PM"
+                if (hours > 12) {
+                    hours -= 12;
+                }
+            }
+
+            if (mins < 10) {
+                mins = "0" + min;
+            }
+
+            return `${month} ${date} | ${hours}:${mins}${periods}`;
+
+        }
+        // console.log(getCurrTime())
+        currDate.innerHTML = getCurrDay() + " | " + getCurrTime();
+
+    </script>
+
+</body>
+
+
+</html>
